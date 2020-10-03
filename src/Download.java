@@ -6,9 +6,6 @@ public class Download {
     public DownloadResult downloadNext(int id) throws InterruptedException {
         Random r = new Random();
         Thread.sleep(r.nextInt(50)); //download process
-        DownloadResult result = new DownloadResult();
-        result.id = id;
-        result.data = r.nextInt(100000);
-        return result;
+        return new DownloadResult(id, r.nextInt(100000));
     }
 }

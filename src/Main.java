@@ -14,5 +14,7 @@ public class Main {
                 finishCounter++;
             }
         }
+
+        System.out.println("Total success checks: " + finishCounter);
     }
 }
