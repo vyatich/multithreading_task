@@ -4,17 +4,26 @@ import model.DownloadResult;
 import java.util.Random;
 
 public class Calculate {
-    public CalculateResult calculate(DownloadResult download) {
+
+    private final DownloadResult downloadResult;
+
+    public Calculate(DownloadResult downloadResult) {
+        this.downloadResult = downloadResult;
+    }
+
+
+    public CalculateResult calculate() {
         Random r = new Random();
         CalculateResult result = new CalculateResult();
-        result.id = download.id;
-        for (int i = 0; i < 200000; i++) {
-            int check = r.nextInt(100000);
-            if (download.check(check)) {
-                result.found = true;
-                return result;
-            }
-        }
+        result.id = downloadResult.id;
+
+        int check;
+        do {
+            check = r.nextInt(2000000);
+        } while (!downloadResult.check(check));
+
+        result.found = true;
+
         return result;
     }
 }
