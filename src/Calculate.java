@@ -1,9 +1,10 @@
+
 import model.CalculateResult;
 import model.DownloadResult;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ThreadLocalRandom;
 
-import java.util.Random;
-
-public class Calculate {
+public class Calculate implements Callable<CalculateResult> {
 
     private final DownloadResult downloadResult;
 
@@ -13,10 +14,9 @@ public class Calculate {
 
 
     public CalculateResult calculate() {
-        Random r = new Random();
+        ThreadLocalRandom r = ThreadLocalRandom.current();
         CalculateResult result = new CalculateResult();
         result.id = downloadResult.id;
-
         int check;
         do {
             check = r.nextInt(2000000);
@@ -25,5 +25,10 @@ public class Calculate {
         result.found = true;
 
         return result;
+    }
+
+    @Override
+    public CalculateResult call() throws Exception {
+        return calculate();
     }
 }
